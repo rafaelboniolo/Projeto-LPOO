@@ -212,14 +212,7 @@ public class BuscarPacienteView extends javax.swing.JInternalFrame {
         new PacienteController().buscarTodos().stream().filter(a -> p.getNome() == nome);
         
        
-        p.setCpf((String)this.jTable1.getValueAt(linha, 1));
-        p.setIdade((int)this.jTable1.getValueAt(linha, 2));
-        r.setNome((String)this.jTable1.getValueAt(linha, 3));
-        p.setResponsavel(r);
-        System.out.println("Nome: "+p.getNome());
-        System.out.println("CPF: "+p.getCpf());
-        System.out.println("Idade: "+p.getIdade());
-        System.out.println("Responsavel: "+p.getResponsavel().getNome());
+        
     }//GEN-LAST:event_jTable1MouseClicked
    
     
