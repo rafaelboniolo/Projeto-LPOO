@@ -34,8 +34,8 @@ public class LoginView extends javax.swing.JFrame {
         //new Hour().initDate(this.Data);
         //this.jProgressBar1.setVisible(false);
         //this.loading.setVisible(false);
-        
-        new UsuarioController().newUser(new JTextField("root"),
+        if(new UsuarioController().isEmpty())
+            new UsuarioController().newUser(new JTextField("root"),
                 new JTextField("root"), new JTextField("root"));
         
     }

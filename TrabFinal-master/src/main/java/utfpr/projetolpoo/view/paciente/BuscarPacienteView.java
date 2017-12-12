@@ -6,9 +6,11 @@
 package utfpr.projetolpoo.view.paciente;
 
 import java.util.Vector;
+import java.util.stream.Stream;
 import javax.swing.table.DefaultTableModel;
 import utfpr.projetolpoo.controller.PacienteController;
 import utfpr.projetolpoo.model.vo.Paciente;
+import utfpr.projetolpoo.model.vo.Responsavel;
 
 /**
  *
@@ -69,6 +71,11 @@ public class BuscarPacienteView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -194,6 +201,28 @@ public class BuscarPacienteView extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int linha = this.jTable1.getSelectedRow();
+        int coluna = this.jTable1.getSelectedColumn();
+        Paciente p = new Paciente();
+        Responsavel r = new Responsavel();
+        String nome = (String)this.jTable1.getValueAt(linha, 0);
+        
+        new PacienteController().buscarTodos().stream().filter(a -> p.getNome() == nome);
+        
+       
+        p.setCpf((String)this.jTable1.getValueAt(linha, 1));
+        p.setIdade((int)this.jTable1.getValueAt(linha, 2));
+        r.setNome((String)this.jTable1.getValueAt(linha, 3));
+        p.setResponsavel(r);
+        System.out.println("Nome: "+p.getNome());
+        System.out.println("CPF: "+p.getCpf());
+        System.out.println("Idade: "+p.getIdade());
+        System.out.println("Responsavel: "+p.getResponsavel().getNome());
+    }//GEN-LAST:event_jTable1MouseClicked
+   
+    
     private void updateTable(){
         new PacienteController().buscarTodos().forEach((a)->{
             Paciente p;

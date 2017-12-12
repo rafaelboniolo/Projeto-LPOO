@@ -40,7 +40,9 @@ public class UsuarioController extends GenericDAO<Usuario>{
     }
         return false;
     }
-    
+    public boolean isEmpty(){
+        return this.genericDao.listAll(Usuario.class).isEmpty();
+    }
     
     
     public boolean newUser(JTextField user, JTextField senha, JTextField senha2 ){

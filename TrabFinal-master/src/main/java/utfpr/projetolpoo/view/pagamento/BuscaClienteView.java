@@ -15,6 +15,7 @@ import utfpr.projetolpoo.model.vo.Paciente;
  */
 public class BuscaClienteView extends javax.swing.JFrame {
     DefaultTableModel modeloTabelaCliente;
+    Paciente p;
 
     public BuscaClienteView() {
 
@@ -64,6 +65,11 @@ public class BuscaClienteView extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ok-mark.png"))); // NOI18N
         jButton1.setText("Ok");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nome/CPF");
 
@@ -127,6 +133,12 @@ public class BuscaClienteView extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new PagamentoView(null,null).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+   
     private void updateTable(){
         this.modeloTabelaCliente.setNumRows(0);
         

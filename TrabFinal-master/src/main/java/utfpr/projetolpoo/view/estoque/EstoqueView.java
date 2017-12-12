@@ -14,6 +14,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
 import utfpr.projetolpoo.controller.EstoqueController;
 import utfpr.projetolpoo.controller.ProdutoController;
+import utfpr.projetolpoo.model.vo.Paciente;
 import utfpr.projetolpoo.model.vo.Produto;
 
 /**
@@ -290,7 +291,7 @@ public class EstoqueView extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-        new PagamentoView().setVisible(true);
+        new PagamentoView(new Paciente(),0.0).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

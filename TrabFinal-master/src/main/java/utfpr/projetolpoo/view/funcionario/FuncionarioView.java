@@ -411,8 +411,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNActionPerformed
-        if(this.cbN.isSelected())
+        if(this.cbN.isSelected()){
             this.tfN.disable();
+            this.tfN.setText("00");
+        }
         else
             this.tfN.enable();
     }//GEN-LAST:event_cbNActionPerformed
@@ -463,9 +465,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-        BuscarPacienteView bp = new BuscarPacienteView();
-        desktopPane.add(bp);
-        bp.setVisible(true);
+        
     }//GEN-LAST:event_btBuscarActionPerformed
     
     private void limparCampos(){
