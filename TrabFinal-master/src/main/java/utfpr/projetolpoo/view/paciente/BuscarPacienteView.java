@@ -5,10 +5,12 @@
  */
 package utfpr.projetolpoo.view.paciente;
 
+import java.util.List;
 import java.util.Vector;
 import java.util.stream.Stream;
 import javax.swing.table.DefaultTableModel;
 import utfpr.projetolpoo.controller.PacienteController;
+import utfpr.projetolpoo.controller.ResponsavelController;
 import utfpr.projetolpoo.model.vo.Paciente;
 import utfpr.projetolpoo.model.vo.Responsavel;
 
@@ -205,13 +207,20 @@ public class BuscarPacienteView extends javax.swing.JInternalFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int linha = this.jTable1.getSelectedRow();
         int coluna = this.jTable1.getSelectedColumn();
-        Paciente p = new Paciente();
-        Responsavel r = new Responsavel();
-        String nome = (String)this.jTable1.getValueAt(linha, 0);
+        Paciente p;
+        Responsavel r;
+        String nome = (String)this.jTable1.getValueAt(linha, 3);
+        String cpf = (String)this.jTable1.getValueAt(linha, 1);
         
-        new PacienteController().buscarTodos().stream().filter(a -> p.getNome() == nome);
+        for(Responsavel re : new ResponsavelController().buscarTodos()){
+            if(re.getNome().equals(nome))
+                r = re;
+        }
         
-       
+        for(Paciente pa : new PacienteController().buscarTodos()){
+            if(pa.getCpf().equals(cpf))
+                p = pa;
+        }
         
     }//GEN-LAST:event_jTable1MouseClicked
    

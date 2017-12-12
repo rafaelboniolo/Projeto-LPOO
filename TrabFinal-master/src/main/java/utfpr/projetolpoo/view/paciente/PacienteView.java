@@ -12,6 +12,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import utfpr.projetolpoo.controller.PacienteController;
+import utfpr.projetolpoo.controller.ResponsavelController;
 import utfpr.projetolpoo.model.vo.Endereco;
 import utfpr.projetolpoo.model.vo.Enfermeiro;
 import utfpr.projetolpoo.model.vo.Paciente;
@@ -26,7 +27,6 @@ public class PacienteView extends javax.swing.JInternalFrame {
      * Creates new form PacienteView
      */
     JDesktopPane desktopPane;
-    Responsavel r;
     Paciente p;
 
     public PacienteView(JDesktopPane desktopPane) {
@@ -34,7 +34,6 @@ public class PacienteView extends javax.swing.JInternalFrame {
         initComponents();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.desktopPane = desktopPane;
-        this.r = new Responsavel();
         this.p = new Paciente();
     }
 
@@ -520,7 +519,7 @@ public class PacienteView extends javax.swing.JInternalFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         
-        if(r.getCpf() != null){
+        if(p.getResponsavel().getCpf() != null){
             Endereco e = new Endereco();
             
             this.p.setNome(this.tfNome.getText());
@@ -558,10 +557,28 @@ public class PacienteView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void tfResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfResponsavelActionPerformed
-        p.setResponsavel(r);
+
     }//GEN-LAST:event_tfResponsavelActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.p.setResponsavel(new Responsavel());
+        
+        System.out.println(this.tfResponsavel.getText().length());
+        
+        if(this.tfResponsavel.getText().length() == 14){
+            for(Responsavel r : new ResponsavelController().buscarTodos()){
+                if(r.getCpf().equals(this.tfResponsavel.getText())){
+                    p.setResponsavel(r);
+                }
+            }
+            if(p.getResponsavel().getCpf() == null){
+                JOptionPane.showMessageDialog(null, "CPF não encontrado!");
+            }else
+                JOptionPane.showMessageDialog(null, p.getResponsavel().getNome()+"   "+p.getResponsavel().getCpf());
+        }    
+        else
+            JOptionPane.showMessageDialog(null, "CPF invalido!");
+        
         
     }//GEN-LAST:event_jButton2ActionPerformed
     

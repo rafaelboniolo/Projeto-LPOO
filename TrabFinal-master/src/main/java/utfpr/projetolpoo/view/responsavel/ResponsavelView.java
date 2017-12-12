@@ -5,6 +5,11 @@
  */
 package utfpr.projetolpoo.view.responsavel;
 
+import javax.swing.JOptionPane;
+import utfpr.projetolpoo.controller.ResponsavelController;
+import utfpr.projetolpoo.model.vo.Endereco;
+import utfpr.projetolpoo.model.vo.Responsavel;
+
 /**
  *
  * @author ALUNO
@@ -14,10 +19,13 @@ public class ResponsavelView extends javax.swing.JInternalFrame {
     /**
      * Creates new form Responsavel
      */
+    
+    Responsavel r;
     public ResponsavelView() {
         this.setResizable(false);
         initComponents();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.r = new Responsavel();
     }
 
     /**
@@ -92,9 +100,9 @@ public class ResponsavelView extends javax.swing.JInternalFrame {
         catch (Exception e){
         }
         jPanel7 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
+        btLimpar = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
 
@@ -197,7 +205,7 @@ public class ResponsavelView extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Paciente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Responsavel", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
 
         jLabel1.setText("Nome: ");
 
@@ -294,27 +302,27 @@ public class ResponsavelView extends javax.swing.JInternalFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/save.png"))); // NOI18N
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/save.png"))); // NOI18N
+        btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btSalvarActionPerformed(evt);
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_draw-08_725558.png"))); // NOI18N
-        jButton5.setText("Limpar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_draw-08_725558.png"))); // NOI18N
+        btLimpar.setText("Limpar");
+        btLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btLimparActionPerformed(evt);
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_Erase_105247.png"))); // NOI18N
-        jButton4.setText("Cancelar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_Erase_105247.png"))); // NOI18N
+        btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btCancelarActionPerformed(evt);
             }
         });
 
@@ -324,11 +332,11 @@ public class ResponsavelView extends javax.swing.JInternalFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(btCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
+                .addComponent(btLimpar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btSalvar)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -336,9 +344,9 @@ public class ResponsavelView extends javax.swing.JInternalFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -408,24 +416,53 @@ public class ResponsavelView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbNStateChanged
 
     private void cbNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNActionPerformed
-        if(this.cbN.isSelected())
-        this.tfN.disable();
-        else
-        this.tfN.enable();
+        if(this.cbN.isSelected()){
+            this.tfN.disable();
+            this.tfN.setText("00");
+        }
+        else{
+            this.tfN.setText(null);
+            this.tfN.enable();
+        }
     }//GEN-LAST:event_cbNActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         this.limparCampos();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btLimparActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btCancelarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         
+        this.r.setCel(this.tfCel.getText());
+        this.r.setCpf(this.tfCPF.getText());
+        this.r.setIdade(0);
+        this.r.setNascimento(this.dateNasc.getDate());
+        this.r.setNome(this.tfNome.getText());
+        this.r.setRg(this.tfRG.getText());
+        this.r.setTel(this.tfTel.getText());
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Endereco e = new Endereco();
+        
+        e.setCep(this.tfCep.getText());
+        e.setCidade(this.tfCidade.getText());
+        e.setN(this.tfN.getText());
+        e.setRua(this.tfRua.getText());
+        e.setUf(this.tfUF.getText());
+        
+        this.r.setEndereco(e);
+        
+        if(new ResponsavelController().gravar(r)){
+            this.limparCampos();
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Erro inesperado!");
+        }
+        
+    }//GEN-LAST:event_btSalvarActionPerformed
     private void limparCampos(){
 
         this.tfCPF.setText(null);
@@ -440,14 +477,16 @@ public class ResponsavelView extends javax.swing.JInternalFrame {
         this.tfN.setEnabled(true);
         this.tfNome.setFocusable(true);
         this.dateNasc.setDate(null);
+        this.tfTel.setText(null);
+        this.tfCel.setText(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btLimpar;
+    private javax.swing.JButton btSalvar;
     private javax.swing.JCheckBox cbN;
     private com.toedter.calendar.JDateChooser dateNasc;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

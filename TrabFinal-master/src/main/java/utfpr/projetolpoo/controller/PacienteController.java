@@ -33,7 +33,7 @@ public class PacienteController {
         genericDao.update(paciente);
     }
     
-    public List buscarTodos()
+    public List<Paciente> buscarTodos()
     {
         List<Paciente> pacientes = genericDao.listAll(Paciente.class);
         

@@ -5,11 +5,12 @@
  */
 package utfpr.projetolpoo.view.estoque;
 
+
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utfpr.projetolpoo.controller.ProdutoController;
 import utfpr.projetolpoo.model.vo.Produto;
-import utfpr.projetolpoo.model.vo.Produto_;
 
 /**
  *
@@ -48,7 +49,6 @@ public class AddProdutosView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
         tfQuantidade = new javax.swing.JTextField();
         tfValor = new javax.swing.JTextField();
         tfNome = new javax.swing.JTextField();
@@ -75,13 +75,6 @@ public class AddProdutosView extends javax.swing.JFrame {
 
         jLabel5.setText("Codigo");
 
-        jCheckBox1.setText("Gerar");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
         tfCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCodigoActionPerformed(evt);
@@ -99,6 +92,11 @@ public class AddProdutosView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/if_save_173091.png"))); // NOI18N
@@ -175,9 +173,7 @@ public class AddProdutosView extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(35, 35, 35)
-                                .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox1)))
+                                .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81))
@@ -210,9 +206,8 @@ public class AddProdutosView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jCheckBox1)
                             .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 127, Short.MAX_VALUE))
+                        .addGap(0, 130, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,17 +228,14 @@ public class AddProdutosView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         this.updateTable();
         Produto p = new Produto();
-        p.setCodigo(Integer.valueOf(this.tfCodigo.getText()));
+        p.setCodigo(Long.valueOf(this.tfCodigo.getText()));
         p.setDescricao(this.tfDescricao.getText());
         p.setValor(Integer.valueOf(this.tfValor.getText()));
         p.setNome(this.tfNome.getText());
+        p.setQuantidade(Integer.valueOf(this.tfQuantidade.getText()));
         p.setFornecedor(null);
         //Arrumar auto codigo
         if (new ProdutoController().gravar(p)){
@@ -252,7 +244,25 @@ public class AddProdutosView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro na inserção, tente novamente !");
         }
     }//GEN-LAST:event_btSalvarActionPerformed
-
+    
+    public Produto onClick(){
+        Produto p = new Produto();
+        
+        int linha = this.jTable1.getSelectedRow();
+        
+        p.setCodigo((long)this.jTable1.getValueAt(linha, 0));
+        p.setNome((String)this.jTable1.getValueAt(linha, 1));
+        p.setValor((Double)this.jTable1.getValueAt(linha, 2));
+        p.setQuantidade((int)this.jTable1.getValueAt(linha, 3));
+        
+        for(Produto p2 : new ProdutoController().buscarTodos()){
+            if(p2.getCodigo() == p.getCodigo()){
+                p.setDescricao(p2.getDescricao());
+            }
+        }
+        return p;
+    }
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -264,6 +274,16 @@ public class AddProdutosView extends javax.swing.JFrame {
     private void tfCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCodigoActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        Produto p;
+        p = this.onClick();
+        this.tfNome.setText(p.getNome());
+        this.tfDescricao.setText(p.getDescricao());
+        this.tfValor.setText(String.valueOf(p.getValor()));
+        this.tfQuantidade.setText(String.valueOf(p.getQuantidade()));
+        this.tfCodigo.setText(String.valueOf(p.getCodigo()));
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private void updateTable(){
         this.modeloTabela.setNumRows(0);
@@ -324,7 +344,6 @@ public class AddProdutosView extends javax.swing.JFrame {
     private javax.swing.JButton btSalvar;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

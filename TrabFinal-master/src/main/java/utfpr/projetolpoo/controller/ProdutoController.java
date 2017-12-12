@@ -33,14 +33,14 @@ public class ProdutoController {
         genericDao.update(produto);
     }
     
-    public List buscarTodos()
+    public List<Produto> buscarTodos()
     {
         List<Produto> produtos = genericDao.listAll(Produto.class);
         
         return produtos;
     }
     
-    public List buscarTodosInRange(long first, long max){
+    public List<Produto> buscarTodosInRange(long first, long max){
         List<Produto> produtos = genericDao.listAll(Produto.class, first, max);
         
         return produtos;
@@ -52,7 +52,7 @@ public class ProdutoController {
         return produtos;
     }
     
-    public List listarConformeCampo(String atriNome, String atriCod, String valorNome, String valorCod){
+    public List<Produto> listarConformeCampo(String atriNome, String atriCod, String valorNome, String valorCod){
         List<Produto> produtos = genericDao.refreshDinamico(Produto.class, atriNome, atriCod, valorNome, valorCod);
         
         return produtos;

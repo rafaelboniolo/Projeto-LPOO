@@ -33,14 +33,14 @@ public class ResponsavelController {
         return genericDao.update(responsavel);
     }
     
-    public List buscarTodos()
+    public List<Responsavel> buscarTodos()
     {
         List<Responsavel> responsaveis = genericDao.listAll(Responsavel.class);
         
         return responsaveis;
     }
     
-    public List buscarTodosInRange(long first, long max){
+    public List<Responsavel> buscarTodosInRange(long first, long max){
         List<Responsavel> responsaveis = genericDao.listAll(Responsavel.class, first, max);
         
         return responsaveis;
@@ -52,7 +52,7 @@ public class ResponsavelController {
         return responsaveis;
     }
     
-    public List listarConformeCampo(String atriNome, String atriCPF, String valorNome, String valorCPF){
+    public List<Responsavel> listarConformeCampo(String atriNome, String atriCPF, String valorNome, String valorCPF){
         List<Responsavel> responsaveis = genericDao.refreshDinamico(Responsavel.class, atriNome, atriCPF, valorNome, valorCPF);
         
         return responsaveis;
