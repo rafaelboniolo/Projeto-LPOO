@@ -6,13 +6,9 @@
 
 package utfpr.projetolpoo.view.estoque;
 
-import utfpr.projetolpoo.view.estoque.AddProdutosView;
-import java.awt.Color;
 import utfpr.projetolpoo.view.pagamento.PagamentoView;
-import javax.swing.Icon;
 import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
-import utfpr.projetolpoo.controller.EstoqueController;
 import utfpr.projetolpoo.controller.ProdutoController;
 import utfpr.projetolpoo.model.vo.Paciente;
 import utfpr.projetolpoo.model.vo.Produto;
@@ -312,7 +308,7 @@ public class EstoqueView extends javax.swing.JInternalFrame {
 
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+        new AltProdutosView().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -331,12 +327,13 @@ public class EstoqueView extends javax.swing.JInternalFrame {
         
         p.setCodigo((long)this.jTable1.getValueAt(linha, 0));
         p.setNome((String)this.jTable1.getValueAt(linha, 1));
-        p.setValor((Double)this.jTable1.getValueAt(linha, 2));
+        p.setValor((Double)(this.jTable1.getValueAt(linha, 2)));
         p.setQuantidade((int)this.jTable1.getValueAt(linha, 3));
         
         for(Produto p2 : new ProdutoController().buscarTodos()){
             if(p2.getCodigo() == p.getCodigo()){
                 p.setDescricao(p2.getDescricao());
+                p.setCodProduto(Long.valueOf(p2.getCodProduto()));
             }
         }
         

@@ -23,7 +23,7 @@ public class Produto {
     
     private long codigo;
     private String descricao;
-    private double valor;
+    private Double valor;
     private int quantidade;
 
     public int getQuantidade() {
@@ -77,7 +77,7 @@ public class Produto {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
@@ -96,4 +96,14 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public long getCodProduto() {
+        return codProduto;
+    }
+
+    public void setCodProduto(long codProduto) {
+        this.codProduto = codProduto;
+    }
+    
+    
 }
