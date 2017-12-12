@@ -239,7 +239,7 @@ public class UsuarioView extends javax.swing.JFrame {
             this.tfNewSenha.enable();
             this.tfNewSenha2.enable();
             this.tfNewUser.enable();
-            this.tfNewUser.setFocusable(true);
+            this.tfNewUser.requestFocus();
         }
         else{
             JOptionPane.showMessageDialog(null, "Dados Invalidos");

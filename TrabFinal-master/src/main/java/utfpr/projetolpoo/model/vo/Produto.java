@@ -104,6 +104,15 @@ public class Produto {
     public void setCodProduto(long codProduto) {
         this.codProduto = codProduto;
     }
+
+    public Estoque getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Estoque estoque) {
+        this.estoque = estoque;
+    }
+    
     
     
 }

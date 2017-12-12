@@ -228,7 +228,7 @@ public class AddProdutosView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        this.updateTable();
+
         Produto p = new Produto();
         p.setCodigo(Long.valueOf(this.tfCodigo.getText()));
         p.setDescricao(this.tfDescricao.getText());
@@ -242,6 +242,7 @@ public class AddProdutosView extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Erro na inserção, tente novamente !");
         }
+        this.updateTable();
     }//GEN-LAST:event_btSalvarActionPerformed
 
     

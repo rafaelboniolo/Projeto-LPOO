@@ -22,7 +22,7 @@ public class AltProdutosView extends javax.swing.JFrame {
      * Creates new form AddProdutos
      */
     DefaultTableModel modeloTabela;
-    
+    Produto p;
     public AltProdutosView() {
         this.setResizable(false);
         initComponents();
@@ -32,6 +32,7 @@ public class AltProdutosView extends javax.swing.JFrame {
                 new String[]{"Codigo","Nome","Valor","Qtd"});
         this.jTable1.setModel(modeloTabela);
         this.updateTable();
+        this.p = new Produto();
     }
 
     /**
@@ -232,22 +233,20 @@ public class AltProdutosView extends javax.swing.JFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         this.updateTable();
-        Produto p = new Produto();
+        
         p.setCodigo(Long.valueOf(this.tfCodigo.getText()));
         p.setDescricao(this.tfDescricao.getText());
         p.setValor(Double.valueOf(this.tfValor.getText()));
         p.setNome(this.tfNome.getText());
         p.setQuantidade(Integer.valueOf(this.tfQuantidade.getText()));
         p.setFornecedor(null);
-        //Arrumar auto codigo
+
         new ProdutoController().atualizar(p);
         this.limparCampos();
         this.updateTable();
     }//GEN-LAST:event_btSalvarActionPerformed
     
-    public Produto onClick(){
-        Produto p = new Produto();
-        
+    public Produto onClick(){        
         int linha = this.jTable1.getSelectedRow();
         
         p.setCodigo((long)this.jTable1.getValueAt(linha, 0));
@@ -258,6 +257,7 @@ public class AltProdutosView extends javax.swing.JFrame {
         for(Produto p2 : new ProdutoController().buscarTodos()){
             if(p2.getCodigo() == p.getCodigo()){
                 p.setDescricao(p2.getDescricao());
+                p.setCodProduto(p2.getCodProduto());
             }
         }
         return p;       
@@ -276,8 +276,8 @@ public class AltProdutosView extends javax.swing.JFrame {
     }//GEN-LAST:event_tfCodigoActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        Produto p;
-        p = this.onClick();
+        
+        this.p = this.onClick();
         this.tfNome.setText(p.getNome());
         this.tfDescricao.setText(p.getDescricao());
         this.tfValor.setText(String.valueOf(p.getValor()));

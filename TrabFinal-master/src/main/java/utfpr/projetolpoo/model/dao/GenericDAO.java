@@ -37,7 +37,7 @@ public class GenericDAO<E> implements iGenericDAO<E>{
     public Boolean update(E object) {
         manager = HibernateConnection.getEntityManager();
         manager.getTransaction().begin();
-            manager.persist(object);
+            manager.merge(object);
         manager.getTransaction().commit();
         System.out.println(object.getClass().getSimpleName() + " atualizado som sucesso!");
         manager.close();
