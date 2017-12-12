@@ -88,7 +88,7 @@ public class GenericDAO<E> implements iGenericDAO<E>{
     public List<E> refreshDinamico(Class object, String atriNome, String atriCPF, String valorNome, String valorCPF) {
         manager = HibernateConnection.getEntityManager();
         //"SELECT * FROM tb_cliente c WHERE c.CLI_CPF LIKE ? OR c.CLI_NOME LIKE ?        
-        String jpql = "SELECT e FROM " + object.getTypeName() + " WHERE " + atriNome + " LIKE :value OR"
+        String jpql = "Select e FROM " + object.getSimpleName()+ " WHERE e." + atriNome + " LIKE :value OR e."
                 + atriCPF + " LIKE :value2";
         Query query = manager.createQuery(jpql);
         query.setParameter("value", "%" + valorNome + "%");

@@ -9,6 +9,7 @@ package utfpr.projetolpoo.view.estoque;
 import utfpr.projetolpoo.view.pagamento.PagamentoView;
 import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
+import utfpr.projetolpoo.controller.EstoqueController;
 import utfpr.projetolpoo.controller.ProdutoController;
 import utfpr.projetolpoo.model.vo.Paciente;
 import utfpr.projetolpoo.model.vo.Produto;
@@ -55,7 +56,7 @@ public class EstoqueView extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        tfCampo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -118,6 +119,20 @@ public class EstoqueView extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+
+        tfCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCampoActionPerformed(evt);
+            }
+        });
+        tfCampo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfCampoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfCampoKeyReleased(evt);
+            }
+        });
 
         jLabel1.setText("Codigo/Nome:");
 
@@ -236,7 +251,7 @@ public class EstoqueView extends javax.swing.JInternalFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jlPesquisa))
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -273,7 +288,7 @@ public class EstoqueView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
@@ -346,6 +361,21 @@ public class EstoqueView extends javax.swing.JInternalFrame {
         this.modeloTabelaVendas.removeRow(linha);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void tfCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCampoActionPerformed
+
+    private void tfCampoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCampoKeyPressed
+        
+        
+    }//GEN-LAST:event_tfCampoKeyPressed
+
+    private void tfCampoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCampoKeyReleased
+        new ProdutoController().listarConformeCampo("nome", "codigo",this.tfCampo.getText(),this.tfCampo.getText()).forEach((a)->{
+                    this.modeloTabelaEstoque.addRow(new Object[]{a.getCodigo(),a.getNome(),a.getValor(),a.getQuantidade()});
+                });
+    }//GEN-LAST:event_tfCampoKeyReleased
+
     private void updateTable(){
         this.modeloTabelaEstoque.setNumRows(0);
         
@@ -377,8 +407,8 @@ public class EstoqueView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlPesquisa;
+    private javax.swing.JTextField tfCampo;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -5,6 +5,8 @@
  */
 package utfpr.projetolpoo.view.lembrete;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utfpr.projetolpoo.controller.LembretesController;
@@ -20,6 +22,7 @@ public class LembretesView extends javax.swing.JFrame {
      * Creates new form Lembretes
      */
     DefaultTableModel modeloTabela;
+ 
     
     
     public LembretesView() {
@@ -208,15 +211,14 @@ public class LembretesView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        JOptionPane.showMessageDialog(null, this.jDateChooser1.getDate());
+                
         boolean flag = new LembretesController().gravar(
                 new Lembretes(this.jDateChooser1,
                         this.jTextArea2,this.tfTitulo));

@@ -54,7 +54,7 @@ public class ProdutoController {
     
     public List<Produto> listarConformeCampo(String atriNome, String atriCod, String valorNome, String valorCod){
         List<Produto> produtos = genericDao.refreshDinamico(Produto.class, atriNome, atriCod, valorNome, valorCod);
-        
+       
         return produtos;
     }
     

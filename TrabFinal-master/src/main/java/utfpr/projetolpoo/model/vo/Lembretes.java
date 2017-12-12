@@ -8,6 +8,7 @@ package utfpr.projetolpoo.model.vo;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Point;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import javax.annotation.Generated;
@@ -30,14 +31,24 @@ public class Lembretes {
     String data;
     String lembrete;
     String titulo;
-
+   private static  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     public Lembretes(JDateChooser jd1, JTextArea lembrete, JTextField titulo) {
-        this.data = String.valueOf(jd1.getDate().getDay()+"/"+jd1.getDate().getMonth()+"/"+(jd1.getDate().getYear()-100));
+        this.data = converteDateToString2(jd1.getDateEditor().getDate());
         
         this.lembrete = lembrete.getText();
         this.titulo = titulo.getText();
     }
-
+    
+     public static String converteDateToString2(Date data) {
+        try {
+            sdf= new SimpleDateFormat("dd/MM/yyyy");
+            return sdf.format(data);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+        return null;
+    }
+    
     public Lembretes() {
     }
 
