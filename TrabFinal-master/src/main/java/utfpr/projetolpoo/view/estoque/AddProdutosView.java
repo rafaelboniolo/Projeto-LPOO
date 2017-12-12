@@ -230,7 +230,7 @@ public class AddProdutosView extends javax.swing.JFrame {
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
 
         Produto p = new Produto();
-        p.setCodigo(Long.valueOf(this.tfCodigo.getText()));
+        p.setCodigo(this.tfCodigo.getText());
         p.setDescricao(this.tfDescricao.getText());
         p.setValor(Double.valueOf(this.tfValor.getText()));
         p.setNome(this.tfNome.getText());

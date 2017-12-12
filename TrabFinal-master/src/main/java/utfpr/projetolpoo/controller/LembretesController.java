@@ -25,7 +25,7 @@ public class LembretesController extends GenericDAO<Lembretes>{
     public boolean gravar(Lembretes l){
         return this.insert(l);
     }
-    public List buscar(){
+    public List<Lembretes> buscar(){
         return this.listAll(Lembretes.class);
     }
     public boolean alarme(Date date){

@@ -21,7 +21,7 @@ public class Produto {
     @GeneratedValue
     private long codProduto;
     
-    private long codigo;
+    private String codigo;
     private String descricao;
     private Double valor;
     private int quantidade;
@@ -46,7 +46,7 @@ public class Produto {
     public Produto() {
     }
     
-    public Produto(long codigo, String descricao, double valor, Fornecedor fornecedor) {
+    public Produto(String codigo, String descricao, double valor, Fornecedor fornecedor) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.valor = valor;
@@ -56,15 +56,16 @@ public class Produto {
     void operation(){
         
     }
-    
-    public long getCodigo() {
+
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(long codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-
+    
+    
     public String getDescricao() {
         return descricao;
     }

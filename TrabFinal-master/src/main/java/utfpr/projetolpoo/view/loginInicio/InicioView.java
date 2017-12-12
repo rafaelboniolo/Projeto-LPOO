@@ -5,7 +5,9 @@
  */
 package utfpr.projetolpoo.view.loginInicio;
 
+import com.toedter.calendar.JCalendar;
 import java.sql.Date;
+import java.util.Calendar;
 import utfpr.projetolpoo.view.report.ReportView;
 import utfpr.projetolpoo.view.paciente.PacienteView;
 import utfpr.projetolpoo.view.usuario.UsuarioView;
@@ -28,7 +30,7 @@ public class InicioView extends javax.swing.JFrame {
     /**
      * Creates new form InicioView
      */
-    boolean STATUS_MESSAGE = true;
+    boolean STATUS_MESSAGE = false;
     
     
     
@@ -39,9 +41,24 @@ public class InicioView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         new Hour().initHour(this.Hora);
-        lembrete(this.imgMessage,this.STATUS_MESSAGE);
+        //lembrete(this.imgMessage,this.STATUS_MESSAGE);
         this.showUser(login);
         this.setLocationRelativeTo(null);
+        
+        new Thread(()->{
+            new LembretesController().buscar().forEach((a)->{
+                if(a!= null){
+                    STATUS_MESSAGE = true;
+                }
+            });
+            this.lembrete(imgMessage, STATUS_MESSAGE);
+            
+            try {
+                Thread.sleep(100000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
         
     }
     

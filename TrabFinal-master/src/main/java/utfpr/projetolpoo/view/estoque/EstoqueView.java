@@ -340,7 +340,7 @@ public class EstoqueView extends javax.swing.JInternalFrame {
         
         int linha = this.jTable1.getSelectedRow();
         
-        p.setCodigo((long)this.jTable1.getValueAt(linha, 0));
+        p.setCodigo(this.jTable1.getValueAt(linha, 0).toString());
         p.setNome((String)this.jTable1.getValueAt(linha, 1));
         p.setValor((Double)(this.jTable1.getValueAt(linha, 2)));
         p.setQuantidade((int)this.jTable1.getValueAt(linha, 3));
@@ -371,6 +371,7 @@ public class EstoqueView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfCampoKeyPressed
 
     private void tfCampoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCampoKeyReleased
+        modeloTabelaEstoque.setNumRows(0);
         new ProdutoController().listarConformeCampo("nome", "codigo",this.tfCampo.getText(),this.tfCampo.getText()).forEach((a)->{
                     this.modeloTabelaEstoque.addRow(new Object[]{a.getCodigo(),a.getNome(),a.getValor(),a.getQuantidade()});
                 });

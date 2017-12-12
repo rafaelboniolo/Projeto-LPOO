@@ -13,12 +13,11 @@ import javax.persistence.Query;
  *
  * @author ALUNO
  */
-public class GenericDAO<E> implements iGenericDAO<E>{
+public class GenericDAO<E> implements iGenericDAO<E> {
 
     EntityManager manager;
-    
-    public void commit()
-    {
+
+    public void commit() {
         manager.getTransaction().commit();
     }
 
@@ -26,7 +25,7 @@ public class GenericDAO<E> implements iGenericDAO<E>{
     public Boolean insert(E object) {
         manager = HibernateConnection.getEntityManager();
         manager.getTransaction().begin();
-            manager.persist(object);
+        manager.persist(object);
         manager.getTransaction().commit();
         System.out.println(object.getClass().getSimpleName() + " salvo com sucesso!");
         manager.close();
@@ -37,7 +36,7 @@ public class GenericDAO<E> implements iGenericDAO<E>{
     public Boolean update(E object) {
         manager = HibernateConnection.getEntityManager();
         manager.getTransaction().begin();
-            manager.merge(object);
+        manager.merge(object);
         manager.getTransaction().commit();
         System.out.println(object.getClass().getSimpleName() + " atualizado som sucesso!");
         manager.close();
@@ -48,7 +47,7 @@ public class GenericDAO<E> implements iGenericDAO<E>{
     public Boolean remove(E object) {
         manager = HibernateConnection.getEntityManager();
         manager.getTransaction().begin();
-            manager.remove(object);
+        manager.remove(object);
         manager.getTransaction().commit();
         System.out.println(object.getClass().getSimpleName() + " excluído som sucesso!");
         manager.close();
@@ -66,10 +65,10 @@ public class GenericDAO<E> implements iGenericDAO<E>{
     }
 
     @Override
-    public List<E> listAll(Class object,Long first, Long max) {
+    public List<E> listAll(Class object, Long first, Long max) {
         manager = HibernateConnection.getEntityManager();
         //SELECT campos FROM tabela WHERE campo BETWEEN inicio_intervalo AND fim_intervalo;
-        String jpql = " SELECT e FROM " + object.getTypeName() + " e WHERE e.id BETWEEN "+ first +" AND " + max;
+        String jpql = " SELECT e FROM " + object.getTypeName() + " e WHERE e.id BETWEEN " + first + " AND " + max;
         Query query = manager.createQuery(jpql);
         List<E> objects = query.getResultList();
         manager.close();
@@ -79,23 +78,22 @@ public class GenericDAO<E> implements iGenericDAO<E>{
     @Override
     public E findOne(Long id, Class object) {
         manager = HibernateConnection.getEntityManager();
-        E obj = (E)manager.find(object , id);
+        E obj = (E) manager.find(object, id);
         manager.close();
         return obj;
     }
 
     //Não está no iGenericDAO
-    public List<E> refreshDinamico(Class object, String atriNome, String atriCPF, String valorNome, String valorCPF) {
+    public List<E> refreshDinamico(Class object, String atriNome, String atriCod, String valorNome, String valorCod) {
         manager = HibernateConnection.getEntityManager();
-        //"SELECT * FROM tb_cliente c WHERE c.CLI_CPF LIKE ? OR c.CLI_NOME LIKE ?        
-        String jpql = "Select e FROM " + object.getSimpleName()+ " WHERE e." + atriNome + " LIKE :value OR e."
-                + atriCPF + " LIKE :value2";
+        String jpql = "from " + object.getSimpleName() + " where " + atriNome + " like:value or " +
+                atriCod + " like:value2";
         Query query = manager.createQuery(jpql);
         query.setParameter("value", "%" + valorNome + "%");
-        query.setParameter("value2", "%" + valorCPF + "%");
+        query.setParameter("value2", "%" + valorCod + "%");
         List<E> objects = query.getResultList();
         manager.close();
         return objects;
     }
-    
+
 }

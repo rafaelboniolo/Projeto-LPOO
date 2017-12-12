@@ -234,7 +234,7 @@ public class AltProdutosView extends javax.swing.JFrame {
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         this.updateTable();
         
-        p.setCodigo(Long.valueOf(this.tfCodigo.getText()));
+        p.setCodigo(this.tfCodigo.getText());
         p.setDescricao(this.tfDescricao.getText());
         p.setValor(Double.valueOf(this.tfValor.getText()));
         p.setNome(this.tfNome.getText());
@@ -249,7 +249,7 @@ public class AltProdutosView extends javax.swing.JFrame {
     public Produto onClick(){        
         int linha = this.jTable1.getSelectedRow();
         
-        p.setCodigo((long)this.jTable1.getValueAt(linha, 0));
+        p.setCodigo(this.jTable1.getValueAt(linha, 0).toString());
         p.setNome((String)this.jTable1.getValueAt(linha, 1));
         p.setValor((Double)this.jTable1.getValueAt(linha, 2));
         p.setQuantidade((int)this.jTable1.getValueAt(linha, 3));
