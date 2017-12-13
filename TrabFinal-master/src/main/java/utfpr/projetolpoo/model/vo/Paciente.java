@@ -22,21 +22,18 @@ public class Paciente extends Pessoa{
     private String laudo;
     
     //@Column(nullable=false)
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne
     private Responsavel responsavel;
     
-    //@Column(nullable=false, unique=true)
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    private Enfermeiro enfermeiro;
-
+  
     public Paciente() {
     }
     
-    public Paciente(String laudo, Responsavel responsavel, Enfermeiro enfermeiro, String nome, int idade, String tel, String cel, String cpf, String rg, Date nascimento, Endereco endereco) {
+    public Paciente(String laudo, Responsavel responsavel, String nome, int idade, String tel, String cel, String cpf, String rg, Date nascimento, Endereco endereco) {
         super(nome, idade, tel, cel, cpf, rg, nascimento, endereco);
         this.laudo = laudo;
         this.responsavel = responsavel;
-        this.enfermeiro = enfermeiro;
+       
     }
 
     public String getLaudo() {
@@ -55,11 +52,4 @@ public class Paciente extends Pessoa{
         this.responsavel = responsavel;
     }
 
-    public Enfermeiro getEnfermeiro() {
-        return enfermeiro;
-    }
-
-    public void setEnfermeiro(Enfermeiro enfermeiro) {
-        this.enfermeiro = enfermeiro;
-    }
 }

@@ -33,7 +33,7 @@ public class FuncionarioController {
         return genericDao.update(func);
     }
     
-    public List buscarTodos()
+    public List<Funcionario> buscarTodos()
     {
         List<Funcionario> funcionarios = genericDao.listAll(Funcionario.class);
         
@@ -52,7 +52,7 @@ public class FuncionarioController {
         return funcionarios;
     }
     
-    public List listarConformeCampo(String atriNome, String atriCPF, String valorNome, String valorCPF){
+    public List<Funcionario> listarConformeCampo(String atriNome, String atriCPF, String valorNome, String valorCPF){
         List<Funcionario> funcionarios = genericDao.refreshDinamico(Funcionario.class, atriNome, atriCPF, valorNome, valorCPF);
         
         return funcionarios;

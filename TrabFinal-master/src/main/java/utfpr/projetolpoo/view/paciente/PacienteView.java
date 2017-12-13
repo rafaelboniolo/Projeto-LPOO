@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import utfpr.projetolpoo.controller.PacienteController;
 import utfpr.projetolpoo.controller.ResponsavelController;
 import utfpr.projetolpoo.model.vo.Endereco;
-import utfpr.projetolpoo.model.vo.Enfermeiro;
 import utfpr.projetolpoo.model.vo.Paciente;
 import utfpr.projetolpoo.model.vo.Responsavel;
 /**
@@ -28,6 +27,7 @@ public class PacienteView extends javax.swing.JInternalFrame {
      */
     JDesktopPane desktopPane;
     Paciente p;
+    boolean STATUS_RESPONSAVEL = false;
 
     public PacienteView(JDesktopPane desktopPane) {
         setResizable(false);
@@ -519,7 +519,7 @@ public class PacienteView extends javax.swing.JInternalFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         
-        if(p.getResponsavel().getCpf() != null){
+        if(this.STATUS_RESPONSAVEL){
             Endereco e = new Endereco();
             
             this.p.setNome(this.tfNome.getText());
@@ -536,7 +536,8 @@ public class PacienteView extends javax.swing.JInternalFrame {
             e.setN(this.tfN.getText());
             e.setRua(this.tfRua.getText());
             e.setUf(this.tfUF.getText());
-
+            
+            
             this.p.setEndereco(e);
 
             new PacienteController().gravar(p);
@@ -561,14 +562,12 @@ public class PacienteView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfResponsavelActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.p.setResponsavel(new Responsavel());
-        
-        System.out.println(this.tfResponsavel.getText().length());
-        
+
         if(this.tfResponsavel.getText().length() == 14){
             for(Responsavel r : new ResponsavelController().buscarTodos()){
                 if(r.getCpf().equals(this.tfResponsavel.getText())){
                     p.setResponsavel(r);
+                    this.STATUS_RESPONSAVEL = true;
                 }
             }
             if(p.getResponsavel().getCpf() == null){

@@ -6,11 +6,9 @@
 package utfpr.projetolpoo;
 
 import javax.persistence.EntityManager;
-import utfpr.projetolpoo.controller.EnfermeiroController;
 import utfpr.projetolpoo.controller.PacienteController;
 import utfpr.projetolpoo.controller.SistemaController;
 import utfpr.projetolpoo.model.dao.HibernateConnection;
-import utfpr.projetolpoo.model.vo.Enfermeiro;
 import utfpr.projetolpoo.model.vo.Paciente;
 import utfpr.projetolpoo.view.loginInicio.InicioView;
 import utfpr.projetolpoo.view.loginInicio.LoginView;

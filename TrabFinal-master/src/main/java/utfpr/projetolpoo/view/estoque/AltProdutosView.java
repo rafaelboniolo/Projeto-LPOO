@@ -246,13 +246,15 @@ public class AltProdutosView extends javax.swing.JFrame {
         this.updateTable();
     }//GEN-LAST:event_btSalvarActionPerformed
     
-    public Produto onClick(){        
+    
+public Produto onClick(){        
         int linha = this.jTable1.getSelectedRow();
         
         p.setCodigo(this.jTable1.getValueAt(linha, 0).toString());
         p.setNome((String)this.jTable1.getValueAt(linha, 1));
         p.setValor((Double)this.jTable1.getValueAt(linha, 2));
         p.setQuantidade((int)this.jTable1.getValueAt(linha, 3));
+        p.setDescricao((String)this.jTable1.getValueAt(linha, 4));
         
         for(Produto p2 : new ProdutoController().buscarTodos()){
             if(p2.getCodigo() == p.getCodigo()){
@@ -262,6 +264,8 @@ public class AltProdutosView extends javax.swing.JFrame {
         }
         return p;       
     }
+
+
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
@@ -285,15 +289,15 @@ public class AltProdutosView extends javax.swing.JFrame {
         this.tfCodigo.setText(String.valueOf(p.getCodigo()));
     }//GEN-LAST:event_jTable1MouseClicked
 
+   
     private void updateTable(){
         this.modeloTabela.setNumRows(0);
         new ProdutoController().buscarTodos().forEach((a)->{
             Produto p = (Produto) a;
-            this.modeloTabela.addRow(new Object[]{p.getCodigo(),p.getNome(),p.getValor(),p.getQuantidade()});
+            this.modeloTabela.addRow(new Object[]{p.getCodigo(),p.getNome(),p.getValor(),p.getQuantidade(), p.getDescricao()});
         });
         
     }
-    
     private void limparCampos(){
         this.tfCodigo.setText(null);
         this.tfDescricao.setText(null);
