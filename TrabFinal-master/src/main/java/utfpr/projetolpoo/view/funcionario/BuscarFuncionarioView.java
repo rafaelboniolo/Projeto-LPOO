@@ -5,17 +5,11 @@
  */
 package utfpr.projetolpoo.view.funcionario;
 
-import utfpr.projetolpoo.view.paciente.*;
-import java.util.List;
-import java.util.Vector;
-import java.util.stream.Stream;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utfpr.projetolpoo.controller.FuncionarioController;
-import utfpr.projetolpoo.controller.PacienteController;
-import utfpr.projetolpoo.controller.ResponsavelController;
 import utfpr.projetolpoo.model.vo.Funcionario;
-import utfpr.projetolpoo.model.vo.Paciente;
-import utfpr.projetolpoo.model.vo.Responsavel;
 
 /**
  *
@@ -27,15 +21,19 @@ public class BuscarFuncionarioView extends javax.swing.JInternalFrame {
      * Creates new form BuscarPaciente
      */
     DefaultTableModel modeloTabela;
+    Funcionario f;
+    JDesktopPane desktopPane;
     
-    public BuscarFuncionarioView() {
+    public BuscarFuncionarioView(JDesktopPane desktopPane) {
         this.setResizable(false);
         initComponents();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.modeloTabela = new DefaultTableModel(null, 
                 new String[]{"Nome","CPF","Pis"});
         jTable1.setModel(modeloTabela);
+        this.desktopPane = desktopPane;
         this.updateTable();
+        
     }
 
     /**
@@ -210,18 +208,26 @@ public class BuscarFuncionarioView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        FuncionarioView fv = new FuncionarioView(desktopPane,this.f);
+        this.desktopPane.add(fv);
+        fv.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int linha = this.jTable1.getSelectedRow();
-        int coluna = this.jTable1.getSelectedColumn();
         
-        String cpf = (String)this.jTable1.getValueAt(linha, 1);
-     
-        
-        
-        
+         String cpf = (String) this.jTable1.getValueAt(linha,1);
+         
+         new FuncionarioController().buscarTodos().forEach((a)->{
+             
+             if(a.getCpf().equals(cpf)){
+               this.f = new FuncionarioController().buscarUm(a.getCodPessoa());
+             }
+             
+         });
+         
+         JOptionPane.showMessageDialog(null, f.getNome());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void tfBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscaKeyReleased
@@ -238,9 +244,9 @@ public class BuscarFuncionarioView extends javax.swing.JInternalFrame {
     private void updateTable(){
         this.modeloTabela.setNumRows(0);
         new FuncionarioController().buscarTodos().forEach((a)->{
-            Funcionario f;
-            f = (Funcionario) a;
-            this.modeloTabela.addRow(new Object[]{f.getNome(),f.getCpf(),f.getPis()});
+            Funcionario fu;
+            fu = (Funcionario) a;
+            this.modeloTabela.addRow(new Object[]{fu.getNome(),fu.getCpf(),fu.getPis()});
         });
     }
     

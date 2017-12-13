@@ -345,6 +345,7 @@ public class EstoqueView extends javax.swing.JInternalFrame {
         p.setValor((Double)(this.jTable1.getValueAt(linha, 2)));
         p.setQuantidade((int)this.jTable1.getValueAt(linha, 3));
         
+        
         for(Produto p2 : new ProdutoController().buscarTodos()){
             if(p2.getCodigo() == p.getCodigo()){
                 p.setDescricao(p2.getDescricao());

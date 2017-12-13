@@ -133,4 +133,13 @@ public abstract class Pessoa {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+    public long getCodPessoa() {
+        return codPessoa;
+    }
+
+    public void setCodPessoa(long codPessoa) {
+        this.codPessoa = codPessoa;
+    }
+    
 }

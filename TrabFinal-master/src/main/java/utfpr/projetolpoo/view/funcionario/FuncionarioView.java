@@ -24,12 +24,14 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
      * Creates new form Paciente
      */
     JDesktopPane desktopPane;
+    Funcionario f;
     
-    public FuncionarioView(JDesktopPane desktopPane) {
+    public FuncionarioView(JDesktopPane desktopPane, Funcionario f) {
         this.setResizable(false);
         initComponents();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.desktopPane = desktopPane;     
+        this.f = f;
     }
 
     /**
@@ -442,6 +444,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println("aaaaaaaaaaaa");
+        System.out.println(this.f.getNome()+"aaa");
+        
         Funcionario f = new Funcionario();
         f.setCargo(null);
         f.setCel(null);
@@ -463,9 +468,12 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-        BuscarFuncionarioView bfv = new BuscarFuncionarioView();
+ 
+        BuscarFuncionarioView bfv = new BuscarFuncionarioView(this.desktopPane);
         this.desktopPane.add(bfv);
         bfv.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_btBuscarActionPerformed
     
     private void limparCampos(){

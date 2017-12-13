@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import utfpr.projetolpoo.Hour;
 import utfpr.projetolpoo.controller.LembretesController;
+import utfpr.projetolpoo.model.vo.Funcionario;
 import utfpr.projetolpoo.view.lembrete.LembretesView;
 
 
@@ -712,7 +713,7 @@ public class InicioView extends javax.swing.JFrame {
     }//GEN-LAST:event_btUsuarioActionPerformed
 
     private void btFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFuncionarioActionPerformed
-        FuncionarioView f = new FuncionarioView(jDesktopPane1);
+        FuncionarioView f = new FuncionarioView(jDesktopPane1, new Funcionario());
         jDesktopPane1.add(f);
         f.setVisible(true);
     }//GEN-LAST:event_btFuncionarioActionPerformed
