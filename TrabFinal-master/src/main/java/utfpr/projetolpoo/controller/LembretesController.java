@@ -32,6 +32,12 @@ public class LembretesController extends GenericDAO<Lembretes>{
         System.out.println(new Date().compareTo(date));
         return false;
     }
-    
+    public List<Lembretes> buscarTodos()
+    {
+        List<Lembretes> lembretes = genericDAO.listAll(Lembretes.class);
+        
+        return lembretes;
+    }
+
     
 }

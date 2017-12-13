@@ -240,9 +240,20 @@ public class LembretesView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        System.out.println(this.modeloTabela.getValueAt(0, 0).toString());
-             
-        //this.jTextArea1.setText(l.getLembrete());
+        Lembretes l = new Lembretes();
+        
+        int linha = this.jTable1.getSelectedRow();
+        
+        l.setTitulo((String)this.jTable1.getValueAt(linha, 1));
+        
+        for(Lembretes l2 : new LembretesController().buscarTodos()){
+            if(l2.getTitulo().equals(l.getTitulo())){
+                l.setLembrete(l2.getLembrete());
+            }
+        }
+        
+        this.jTextArea1.setText(l.getLembrete());
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void updateTable(){

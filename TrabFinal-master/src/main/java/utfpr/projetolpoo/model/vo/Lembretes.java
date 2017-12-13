@@ -67,6 +67,26 @@ public class Lembretes {
     public String getTitulo() {
         return titulo;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setLembrete(String lembrete) {
+        this.lembrete = lembrete;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public static void setSdf(SimpleDateFormat sdf) {
+        Lembretes.sdf = sdf;
+    }
     
     
 }
